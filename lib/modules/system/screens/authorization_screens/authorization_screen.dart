@@ -23,16 +23,15 @@ class AuthorizationScreen extends StatefulWidget implements Navigatable {
 }
 
 class _AuthorizationScreenState extends State<AuthorizationScreen> {
-  var phoneController = TextEditingController();
+  var nameController = TextEditingController();
   var passwordController = TextEditingController();
-  MaskTextInputFormatter formatter = InputHelper.maskTextInputFormatter();
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
           'Авторизация',
@@ -55,15 +54,14 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
               child: Column(
                 children: [
                   CommonInput(
-                    "Введите номер телефона",
+                    "Введите логин",
                     margin: EdgeInsets.only(top: 0),
-                    type: InputType.PHONE,
-                    controller: phoneController,
-                    formatters: [formatter],
+                    type: InputType.TEXT,
+                    controller: nameController,
                     borderRadius: 0,
                     contentPaddingVertical: 25,
-                    onChanged: (val) {
-                      if (val.length == 18) {
+                    onSubmitted: (val) {
+                      if (val.length >= 3) {
                         FocusScope.of(context).nextFocus();
                       }
                     },
@@ -77,10 +75,15 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                     borderAlpha: 0,
                     contentPaddingVertical: 25,
                     onSubmitted: (val) {
-                      if (phoneController.text.length == 18 &&
+                      if (nameController.text.length >= 3 &&
                           passwordController.text.length >= 8) {
                         Navigator.pushReplacementNamed(context, Routes.system);
-                        // login();
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Wrong password"),
+                          ),
+                        );
                       }
                     },
                   ),

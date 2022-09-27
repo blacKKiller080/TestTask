@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class InputHelper {
-  static MaskTextInputFormatter maskTextInputFormatter() {
+  static MaskTextInputFormatter phoneTextInputFormatter() {
     return MaskTextInputFormatter(
       mask: "+# (###) ###-##-##",
       filter: {
