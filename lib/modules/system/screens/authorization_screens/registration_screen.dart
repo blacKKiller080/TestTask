@@ -15,6 +15,7 @@ class RegistrationScreen extends StatelessWidget implements Navigatable {
     var height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text(
           'Регистрация',
