@@ -7,6 +7,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../../core/components/auth_button.dart';
 import '../../../../core/components/auth_input.dart';
+import '../../../../core/components/common_button.dart';
 import '../../../../core/components/common_input.dart';
 import '../../../../core/helper/input_helper.dart';
 import '../../../../core/helper/navigateble.dart';
@@ -65,7 +66,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     contentPaddingVertical: 25,
                     onSubmitted: (val) {
                       if (val.length >= 3) {
-                        FocusScope.of(context).nextFocus();
+                        // FocusScope.of(context).nextFocus();
                       }
                     },
                   ),
@@ -132,12 +133,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
               ),
             ),
-            AuthButton('Создать аккаунт', 290, onTap: () {
-              Navigator.pushNamed(context, Routes.system);
-            }),
+            CommonButton(
+              child: Text('Создать аккаунт'),
+              onPressed: () {
+                //login(),
+                Navigator.pushNamed(context, Routes.system);
+              },
+              margin: EdgeInsets.only(top: 290, left: 15, right: 15),
+              success: true,
+            ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
   }
 }

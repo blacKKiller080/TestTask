@@ -24,6 +24,7 @@ class CommonInput extends StatefulWidget {
   double borderRadius;
   FontWeight fontWeight;
   int borderAlpha;
+  final Color? fillColor;
 
   CommonInput(
     this.text, {
@@ -44,6 +45,7 @@ class CommonInput extends StatefulWidget {
     this.borderRadius = 10,
     this.fontWeight = FontWeight.normal,
     this.borderAlpha = 255,
+    this.fillColor,
   });
 
   @override
@@ -88,7 +90,7 @@ class _CommonInputState extends State<CommonInput> {
             initialValue: widget.initialValue,
             enabled: widget.editable,
             decoration: InputDecoration(
-              fillColor: Colors.white,
+              fillColor: widget.fillColor ?? Colors.white,
               filled: true,
               suffixIcon: isPasswordInput()
                   ? GestureDetector(
@@ -126,7 +128,7 @@ class _CommonInputState extends State<CommonInput> {
               alignLabelWithHint: false,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Styles.k_white_color,
+                  color: widget.customColor ?? Styles.k_white_color,
                 ),
                 borderRadius:
                     BorderRadius.all(Radius.circular(widget.borderRadius)),

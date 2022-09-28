@@ -19,6 +19,8 @@ class EsentaiScreen extends StatefulWidget implements Navigatable {
 }
 
 class _EsentaiScreenState extends State<EsentaiScreen> {
+  bool isFavourite = false;
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -39,19 +41,12 @@ class _EsentaiScreenState extends State<EsentaiScreen> {
         actions: <Widget>[
           IconButton(
             onPressed: () {
-              setState(() {
-                if (!flag && _favIconColor == Colors.white) {
-                  _favIconColor = Colors.red;
-                  flag = true;
-                } else {
-                  _favIconColor = Colors.white;
-                  flag = false;
-                }
-              });
+              isFavourite = !isFavourite;
+              setState(() {});
             },
             icon: Icon(
               Icons.favorite_border_outlined,
-              color: _favIconColor,
+              color: isFavourite ? Colors.red : Colors.grey,
             ),
           ),
         ],

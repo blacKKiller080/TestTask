@@ -7,6 +7,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../../core/components/auth_button.dart';
 import '../../../../core/components/auth_input.dart';
+import '../../../../core/components/common_button.dart';
 import '../../../../core/components/common_input.dart';
 import '../../../../core/helper/input_helper.dart';
 import '../../../../core/helper/navigateble.dart';
@@ -25,6 +26,7 @@ class AuthorizationScreen extends StatefulWidget implements Navigatable {
 class _AuthorizationScreenState extends State<AuthorizationScreen> {
   var nameController = TextEditingController();
   var passwordController = TextEditingController();
+  bool isLoginButtonDisabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +76,20 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                     borderRadius: 0,
                     borderAlpha: 0,
                     contentPaddingVertical: 25,
+                    onChanged: (val) {
+                      if (nameController.text.length >= 3 &&
+                          passwordController.text.length >= 8) {
+                        isLoginButtonDisabled = val == '';
+                      } else {
+                        isLoginButtonDisabled = true;
+                      }
+                    },
                     onSubmitted: (val) {
                       if (nameController.text.length >= 3 &&
                           passwordController.text.length >= 8) {
-                        Navigator.pushReplacementNamed(context, Routes.system);
+                        isLoginButtonDisabled = val == '';
+
+                        //Navigator.pushReplacementNamed(context, Routes.system);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -88,21 +100,37 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                     },
                   ),
                 ],
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
               ),
             ),
-            AuthButton('Войти', 32),
-            AuthButton(
-              'Зарегистрироваться',
-              19,
-              onTap: () {
+            CommonButton(
+              child: Text('Войти'),
+              onPressed: () {
+                //login(),
+                Navigator.pushNamed(context, Routes.system);
+              },
+              margin: EdgeInsets.only(top: 19, left: 15, right: 15),
+              success: true,
+              disabled: isLoginButtonDisabled,
+            ),
+            CommonButton(
+              child: Text('Зарегистрироваться'),
+              onPressed: () {
+                //login(),
                 Navigator.pushNamed(context, Routes.registration_screen);
               },
+              margin: EdgeInsets.only(top: 19, left: 15, right: 15),
+              success: true,
             ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    passwordController.dispose();
   }
 }
