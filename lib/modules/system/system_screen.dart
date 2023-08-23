@@ -32,7 +32,7 @@ class _SystemScreenState extends State<SystemScreen> {
             },
           );
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             label: "",

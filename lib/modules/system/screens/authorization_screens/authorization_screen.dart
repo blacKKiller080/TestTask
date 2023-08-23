@@ -24,9 +24,10 @@ class AuthorizationScreen extends StatefulWidget implements Navigatable {
 }
 
 class _AuthorizationScreenState extends State<AuthorizationScreen> {
-  var nameController = TextEditingController();
+  var phoneController = TextEditingController();
   var passwordController = TextEditingController();
   bool isLoginButtonDisabled = true;
+  MaskTextInputFormatter formatter = InputHelper.phoneTextInputFormatter();
 
   @override
   Widget build(BuildContext context) {
@@ -56,14 +57,15 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
               child: Column(
                 children: [
                   CommonInput(
-                    "Введите логин",
+                    "Введите номер",
                     margin: EdgeInsets.only(top: 0),
-                    type: InputType.TEXT,
-                    controller: nameController,
+                    type: InputType.PHONE,
+                    controller: phoneController,
+                    formatters: [formatter],
                     borderRadius: 0,
                     contentPaddingVertical: 25,
-                    onSubmitted: (val) {
-                      if (val.length >= 3) {
+                    onChanged: (val) {
+                      if (val.length == 18) {
                         FocusScope.of(context).nextFocus();
                       }
                     },
@@ -77,7 +79,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                     borderAlpha: 0,
                     contentPaddingVertical: 25,
                     onChanged: (val) {
-                      if (nameController.text.length >= 3 &&
+                      if (phoneController.text.length == 18 &&
                           passwordController.text.length >= 8) {
                         isLoginButtonDisabled = val == '';
                       } else {
@@ -85,7 +87,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                       }
                     },
                     onSubmitted: (val) {
-                      if (nameController.text.length >= 3 &&
+                      if (phoneController.text.length == 18 &&
                           passwordController.text.length >= 8) {
                         isLoginButtonDisabled = val == '';
 
@@ -130,7 +132,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
   @override
   void dispose() {
     super.dispose();
-    nameController.dispose();
+    phoneController.dispose();
     passwordController.dispose();
   }
 }
