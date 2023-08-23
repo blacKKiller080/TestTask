@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CommonInput(
               "Search",
-              margin: EdgeInsets.only(top: 65, bottom: 30),
+              margin: EdgeInsets.only(top: 65, bottom: 25),
               type: InputType.TEXT,
               controller: searchController,
               contentPaddingVertical: 10,
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   MainContainers(
                     'assets/images/png/esentai.png',
-                    'Esentai Mall',
+                    'Esentai',
                     'Один из крупнейших торговых центров в Алматы',
                     'Аль-Фараби',
                     Routes.esentai_screen,

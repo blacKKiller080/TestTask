@@ -60,7 +60,7 @@ class _MainContainersState extends State<MainContainers> {
                             style: GoogleFonts.manrope(
                               fontWeight: FontWeight.w400,
                               color: Color.fromARGB(255, 146, 146, 146),
-                              fontSize: 13,
+                              fontSize: 10,
                               height: 1.5,
                             ),
                           ),
